@@ -95,6 +95,9 @@ class GimnastaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $gimnasta = Gimnasta::findOrFail($id);
+        $gimnasta->delete();
+
+        return redirect()->route('gimnastas.index');
     }
 }
