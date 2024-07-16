@@ -14,6 +14,14 @@
         body {
             font-family: 'Nunito', sans-serif;
         }
+        .min-h-screen {
+            display: flex;
+            flex-direction: column;
+            min-height: 300vh;
+        }
+        main {
+            flex: 1;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -26,6 +34,11 @@
                             GymClubs Connect
                         </a>
                     </div>
+                    <div class="flex space-x-4">
+                        <a href="/clubs" class="text-gray-800 hover:text-gray-700">Clubs</a>
+                        <a href="/gimnastas" class="text-gray-800 hover:text-gray-700">Gimnastas</a>
+                        <a href="/competiciones" class="text-gray-800 hover:text-gray-700">Competiciones</a>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -33,6 +46,19 @@
         <main class="py-4">
             @yield('content')
         </main>
+        <footer class="bg-white shadow mt-8">
+            <div class="container mx-auto px-6 py-4">
+                <div class="flex justify-between items-center">
+                    <div class="text-gray-600">
+                        &copy; 2024 GymClubs Connect. Todos los derechos reservados.
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-600 hover:text-gray-900">Políticas de privacidad</a>
+                        <a href="#" class="text-gray-600 hover:text-gray-900">Términos del servicio</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 </body>
 </html>

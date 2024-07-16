@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Club;
 
 use Illuminate\Http\Request;
 
@@ -11,7 +12,8 @@ class ClubController extends Controller
      */
     public function index()
     {
-        //
+        $clubs = Club::all();
+        return view('clubs.index', compact('clubs'));
     }
 
     /**
@@ -19,7 +21,7 @@ class ClubController extends Controller
      */
     public function create()
     {
-        //
+        return view('clubs.create');
     }
 
     /**
@@ -27,7 +29,18 @@ class ClubController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nombre_club' => 'required|max:255',
+            'nombre_presidente' => 'required|max:255',
+            'ciudad' => 'required|max:255',
+            'direccion' => 'required|max:255',
+            'telefono' => 'required|max:20',
+            'fecha_registro' => 'required|date',
+        ]);
+
+        Club::create($validatedData);
+
+        return redirect()->route('clubs.index');
     }
 
     /**
@@ -35,7 +48,8 @@ class ClubController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $club = Club::findOrFail($id);
+        return view('clubs.show', compact('club'));
     }
 
     /**
@@ -43,7 +57,8 @@ class ClubController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $club = Club::findOrFail($id);
+        return view('clubs.edit', compact('club'));
     }
 
     /**
@@ -51,7 +66,18 @@ class ClubController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'nombre_club' => 'required|max:255',
+            'nombre_presidente' => 'required|max:255',
+            'ciudad' => 'required|max:255',
+            'direccion' => 'required|max:255',
+            'telefono' => 'required|max:20',
+            'fecha_registro' => 'required|date',
+        ]);
+
+        Club::whereId($id)->update($validatedData);
+
+        return redirect()->route('clubs.index');
     }
 
     /**
@@ -59,6 +85,9 @@ class ClubController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $club = Club::findOrFail($id);
+        $club->delete();
+
+        return redirect()->route('clubs.index');
     }
 }
