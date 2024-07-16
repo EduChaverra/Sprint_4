@@ -62,7 +62,9 @@ class GimnastaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $gimnasta = Gimnasta::findOrFail($id);
+        $clubs = Club::all();
+        return view('gimnastas.edit', compact('gimnasta', 'clubs'));
     }
 
     /**
@@ -70,7 +72,22 @@ class GimnastaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'nombre' => 'required|max:255',
+            'apellidos' => 'required|max:255',
+            'modalidad' => 'required|max:255',
+            'nivel' => 'required|max:255',
+            'genero' => 'required|max:255',
+            'ciudad' => 'required|max:255',
+            'direccion' => 'required|max:255',
+            'telefono' => 'required|max:20',
+            'fecha_registro' => 'required|date',
+            'club_id' => 'required|exists:clubs,id',
+        ]);
+
+        Gimnasta::whereId($id)->update($validatedData);
+
+        return redirect()->route('gimnastas.index');
     }
 
     /**
