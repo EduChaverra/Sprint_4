@@ -48,7 +48,8 @@ class CompeticionController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $competicion = Competicion::findOrFail($id);
+        return view('competiciones.show', compact('competicion'));
     }
 
     /**
@@ -56,7 +57,8 @@ class CompeticionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $competicion = Competicion::findOrFail($id);
+        return view('competiciones.edit', compact('competicion'));
     }
 
     /**
@@ -64,7 +66,16 @@ class CompeticionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'nombre' => 'required|max:255',
+            'fecha' => 'nullable|date',
+            'lugar' => 'required|max:255',
+            'valor_inscripcion' => 'nullable|numeric',
+        ]);
+
+        Competicion::whereId($id)->update($validatedData);
+
+        return redirect()->route('competiciones.index');
     }
 
     /**
