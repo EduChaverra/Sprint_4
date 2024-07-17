@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Competicion;
 
 use Illuminate\Http\Request;
 
@@ -11,7 +12,8 @@ class CompeticionController extends Controller
      */
     public function index()
     {
-        //
+        $competiciones = Competicion::all();
+        return view('competiciones.index', compact('competiciones'));
     }
 
     /**
@@ -19,7 +21,7 @@ class CompeticionController extends Controller
      */
     public function create()
     {
-        //
+        return view('competiciones.create');
     }
 
     /**
@@ -27,8 +29,19 @@ class CompeticionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nombre' => 'required|max:255',
+            'fecha' => 'nullable|date',
+            'lugar' => 'required|max:255',
+            'valor_inscripcion' => 'nullable|numeric',
+        ]);
+        
+        Competicion::create($validatedData);
+
+        return redirect()->route('competiciones.index');
+
     }
+
 
     /**
      * Display the specified resource.
