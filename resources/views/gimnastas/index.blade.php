@@ -16,19 +16,23 @@
         <thead>
             <tr class="bg-gray-200 table-header">
                 <th class="px-4 py-2">Nombre</th>
-                <th class="px-4 py-2">Apellidos</th>
                 <th class="px-4 py-2">Modalidad</th>
                 <th class="px-4 py-2">Nivel</th>
-                <th class="px-4 py-2">Acciones</th>
+                <th class="px-4 py-2">Ciudad</th>
+                <th class="px-4 py-2">Telefono</th>
+                <th class="px-4 py-2">Club</th>
+                <th class="px-4 py-2">Editar / Borrar</th>
             </tr>
         </thead>
         <tbody>
             @foreach($gimnastas as $gimnasta)
             <tr class="bg-white border-b">
-                <td class="px-4 py-2">{{ $gimnasta->nombre }}</td>
-                <td class="px-4 py-2">{{ $gimnasta->apellidos }}</td>
+                <td class="px-4 py-2">{{ $gimnasta->nombre . ' ' . $gimnasta->apellidos }}</td>
                 <td class="px-4 py-2">{{ $gimnasta->modalidad }}</td>
                 <td class="px-4 py-2">{{ $gimnasta->nivel }}</td>
+                <td class="px-4 py-2">{{ $gimnasta->ciudad }}</td>
+                <td class="px-4 py-2">{{ $gimnasta->telefono }}</td>
+                <td class="px-4 py-2">{{ $gimnasta->club->nombre_club }}</td>
                 <td class="px-4 py-2 text-center">
                     <div class="flex space-x-8">
                         <a href="{{ route('gimnastas.edit', $gimnasta->id) }}" class="text-yellow-500 hover:text-yellow-700" title="Editar">

@@ -16,4 +16,9 @@ class Club extends Model
         'telefono',
         'fecha_registro',
     ];
+
+    public function gimnastas()
+    {
+        return $this->hasMany(Gimnasta::class);
+    }
 }

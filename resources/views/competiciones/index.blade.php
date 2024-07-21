@@ -19,7 +19,7 @@
                 <th class="px-4 py-2">Fecha</th>
                 <th class="px-4 py-2">Lugar</th>
                 <th class="px-4 py-2">Valor Inscripción (€)</th>
-                <th class="px-4 py-2">Acciones</th>
+                <th class="px-4 py-2">Editar / Borrar</th>
             </tr>
         </thead>
         <tbody>

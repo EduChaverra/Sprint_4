@@ -18,7 +18,9 @@
                 <th class="px-4 py-2">Nombre del Club</th>
                 <th class="px-4 py-2">Presidente</th>
                 <th class="px-4 py-2">Ciudad</th>
-                <th class="px-4 py-2">Acciones</th>
+                <th class="px-4 py-2">Telefono</th>
+                <th class="px-4 py-2">Fecha de registro</th>
+                <th class="px-4 py-2">Editar / Borrar</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +29,8 @@
                 <td class="px-4 py-2">{{ $club->nombre_club }}</td>
                 <td class="px-4 py-2">{{ $club->nombre_presidente }}</td>
                 <td class="px-4 py-2">{{ $club->ciudad }}</td>
+                <td class="px-4 py-2">{{ $club->telefono }}</td>
+                <td class="px-4 py-2">{{ $club->fecha_registro }}</td>
                 <td class="px-4 py-2 text-center">
                     <div class="flex space-x-8">
                         <a href="{{ route('clubs.edit', $club->id) }}" class="text-yellow-500 hover:text-yellow-700" title="Editar">

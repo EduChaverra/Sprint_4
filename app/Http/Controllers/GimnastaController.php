@@ -13,7 +13,7 @@ class GimnastaController extends Controller
      */
     public function index()
     {
-        $gimnastas = Gimnasta::all();
+        $gimnastas = Gimnasta::with('club')->get();
         return view('gimnastas.index', compact('gimnastas'));
     }
 

@@ -20,4 +20,9 @@ class Gimnasta extends Model
         'fecha_registro',
         'club_id',
     ];
+    
+    public function club()
+    {
+        return $this->belongsTo(Club::class);
+    }
 }
