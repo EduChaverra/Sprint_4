@@ -92,7 +92,10 @@
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
             </div>
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Registrar</button>
+            <div class="flex justify-between">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full mr-2">Crear</button>
+                <a href="{{ route('gimnastas.index') }}" class=" bg-red-400 hover:bg-red-600 text-white no-underline font-bold py-2 px-4 rounded w-full ml-2 text-center">Cancelar</a>
+            </div>
         </form>
     </div>
 </div>
