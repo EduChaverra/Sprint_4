@@ -1,16 +1,26 @@
 @extends('layouts.app')
+@section('extra-margin-top', 'extra-margin-top')
 
 @section('content')
+<style>
+    .table-header th {
+        text-align: left;
+    }
+</style>
 <div class="container mx-auto px-4">
     <h1 class="text-2xl font-bold mb-4">Clubs</h1>
-    <a href="{{ route('clubs.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Agregar Club</a>
+    <div class="mb-8 text-right">
+        <a href="{{ route('clubs.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> + Agregar Club</a>
+    </div>
     <table class="table-auto w-full mt-4">
         <thead>
-            <tr class="bg-gray-200">
+            <tr class="bg-gray-200 table-header">
                 <th class="px-4 py-2">Nombre del Club</th>
                 <th class="px-4 py-2">Presidente</th>
                 <th class="px-4 py-2">Ciudad</th>
-                <th class="px-4 py-2">Acciones</th>
+                <th class="px-4 py-2">Telefono</th>
+                <th class="px-4 py-2">Fecha de registro</th>
+                <th class="px-4 py-2">Editar / Borrar</th>
             </tr>
         </thead>
         <tbody>
@@ -19,13 +29,21 @@
                 <td class="px-4 py-2">{{ $club->nombre_club }}</td>
                 <td class="px-4 py-2">{{ $club->nombre_presidente }}</td>
                 <td class="px-4 py-2">{{ $club->ciudad }}</td>
-                <td class="px-4 py-2">
-                    <a href="{{ route('clubs.edit', $club->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Editar</a>
-                    <form action="{{ route('clubs.destroy', $club->id) }}" method="POST" class="inline-block">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Eliminar</button>
-                    </form>
+                <td class="px-4 py-2">{{ $club->telefono }}</td>
+                <td class="px-4 py-2">{{ $club->fecha_registro }}</td>
+                <td class="px-4 py-2 text-center">
+                    <div class="flex space-x-8">
+                        <a href="{{ route('clubs.edit', $club->id) }}" class="text-yellow-500 hover:text-yellow-700" title="Editar">
+                            <i class="fas fa-pencil-alt fa-lg"></i>
+                        </a>
+                        <form action="{{ route('clubs.destroy', $club->id) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Estás seguro que quieres eliminar este club?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-500 hover:text-red-700" title="Eliminar">
+                                <i class="fas fa-trash fa-lg"></i>
+                            </button>
+                        </form>
+                    </div>
                 </td>
             </tr>
             @endforeach

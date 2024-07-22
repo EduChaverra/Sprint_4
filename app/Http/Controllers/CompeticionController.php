@@ -83,6 +83,9 @@ class CompeticionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $competicion = Competicion::findOrFail($id);
+        $competicion->delete();
+
+        return redirect()->route('competiciones.index');
     }
 }
