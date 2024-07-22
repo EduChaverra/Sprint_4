@@ -8,4 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Gimnasta extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'nombre',
+        'apellidos',
+        'modalidad',
+        'nivel',
+        'genero',
+        'ciudad',
+        'direccion',
+        'telefono',
+        'fecha_registro',
+        'club_id',
+    ];
+    
+    public function club()
+    {
+        return $this->belongsTo(Club::class);
+    }
 }

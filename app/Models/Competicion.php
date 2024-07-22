@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Competicion extends Model
 {
     use HasFactory;
+    protected $table = 'competiciones';
+    protected $fillable = [
+        'nombre',
+        'fecha',
+        'lugar',
+        'valor_inscripcion',
+    ];
 }

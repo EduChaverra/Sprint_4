@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Competicion;
 
 use Illuminate\Http\Request;
 
@@ -11,7 +12,8 @@ class CompeticionController extends Controller
      */
     public function index()
     {
-        //
+        $competiciones = Competicion::all();
+        return view('competiciones.index', compact('competiciones'));
     }
 
     /**
@@ -19,7 +21,7 @@ class CompeticionController extends Controller
      */
     public function create()
     {
-        //
+        return view('competiciones.create');
     }
 
     /**
@@ -27,15 +29,27 @@ class CompeticionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nombre' => 'required|max:255',
+            'fecha' => 'nullable|date',
+            'lugar' => 'required|max:255',
+            'valor_inscripcion' => 'nullable|numeric',
+        ]);
+        
+        Competicion::create($validatedData);
+
+        return redirect()->route('competiciones.index');
+
     }
+
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        $competicion = Competicion::findOrFail($id);
+        return view('competiciones.show', compact('competicion'));
     }
 
     /**
@@ -43,7 +57,8 @@ class CompeticionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $competicion = Competicion::findOrFail($id);
+        return view('competiciones.edit', compact('competicion'));
     }
 
     /**
@@ -51,7 +66,16 @@ class CompeticionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'nombre' => 'required|max:255',
+            'fecha' => 'nullable|date',
+            'lugar' => 'required|max:255',
+            'valor_inscripcion' => 'nullable|numeric',
+        ]);
+
+        Competicion::whereId($id)->update($validatedData);
+
+        return redirect()->route('competiciones.index');
     }
 
     /**
@@ -59,6 +83,9 @@ class CompeticionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $competicion = Competicion::findOrFail($id);
+        $competicion->delete();
+
+        return redirect()->route('competiciones.index');
     }
 }

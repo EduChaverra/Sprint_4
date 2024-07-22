@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Club extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'nombre_club',
+        'nombre_presidente',
+        'ciudad',
+        'direccion',
+        'telefono',
+        'fecha_registro',
+    ];
+
+    public function gimnastas()
+    {
+        return $this->hasMany(Gimnasta::class);
+    }
 }
